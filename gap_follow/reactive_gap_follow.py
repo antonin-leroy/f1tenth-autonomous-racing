@@ -22,7 +22,7 @@ class ReactiveFollowGap:
 
     def preprocess_lidar(self, ranges, angle_increment):
         """ Preprocess the LiDAR scan array.
-            1. Rejecting high values (eg. > 3m) [cite: 22]
+            1. Rejecting high values (eg. > 3m)
             2. Setting bad values (NaN) to a safe distance
             3. DISPARITY EXTENDER: Étend les obstacles pour éviter de couper les virages
         """
@@ -130,7 +130,7 @@ class ReactiveFollowGap:
         # On découpe le tableau traité
         fov_ranges = proc_ranges[idx_min_fov : idx_max_fov]
         
-        # --- Etape 1 : Trouver le point le plus proche [cite: 23] ---
+        # --- Etape 1 : Trouver le point le plus proche ---
         min_idx = np.argmin(fov_ranges)
         
 

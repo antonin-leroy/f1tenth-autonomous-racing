@@ -24,7 +24,7 @@ class PurePursuit(object):
 
         # --- CHARGEMENT CSV ---
         self.waypoints = []
-        csv_file = '/home/antonin/catkin_ws/src/f1tenth_labs/waypoint_logger/scripts/waypoints.csv'
+        csv_file = rospy.get_param('~waypoints_file', 'waypoints.csv')
 
         try:
             with open(csv_file, 'r') as csvfile:

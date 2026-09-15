@@ -34,8 +34,8 @@ class WallFollow:
         #drive_topic = '/nav'
         drive_topic = '/vesc/ackermann_cmd_mux/input/navigation'
 
-        self.lidar_sub = rospy.Subscriber(lidarscan_topic, LaserScan, self.lidar_callback) #TODO: Subscribe to LIDAR
-        self.drive_pub = rospy.Publisher(drive_topic, AckermannDriveStamped, queue_size=10)#TODO: Publish to drive
+        self.lidar_sub = rospy.Subscriber(lidarscan_topic, LaserScan, self.lidar_callback)
+        self.drive_pub = rospy.Publisher(drive_topic, AckermannDriveStamped, queue_size=10)
 
 
 
@@ -44,7 +44,6 @@ class WallFollow:
         # angle: between -45 to 225 degrees, where 0 degrees is directly to the right
         # Outputs length in meters to object with angle in lidar scan field of view
         #make sure to take care of nans etc.
-        #TODO: implement
 
         
         angle_min = data.angle_min
@@ -69,7 +68,6 @@ class WallFollow:
         derive = error-prev_error
         angle = error * kp + ki * integral + kd * derive
         prev_error=error
-        #TODO: Use kp, ki & kd to implement a PID controller 
         drive_msg = AckermannDriveStamped()
         drive_msg.header.stamp = rospy.Time.now()
         drive_msg.header.frame_id = "laser"

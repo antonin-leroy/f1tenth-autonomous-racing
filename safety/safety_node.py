@@ -16,7 +16,6 @@ class Safety(object):
         """
         self.speed = 0.0
         
-        # TODO: create ROS subscribers and publishers.
         self.pub_brake = rospy.Publisher('/brake', AckermannDriveStamped, queue_size=10)
         #self.pub_brake = rospy.Publisher('/vesc/low_level/ackermann_cmd_mux/input/safety', AckermannDriveStamped, queue_size=10)
         self.pub_bool = rospy.Publisher('/brake_bool', Bool, queue_size=10)
@@ -24,11 +23,9 @@ class Safety(object):
         rospy.Subscriber('/odom', Odometry, self.odom_callback)
 
     def odom_callback(self, odom_msg):
-        # TODO: update current speed
         self.speed = odom_msg.twist.twist.linear.x
 
     def scan_callback(self, scan_msg):
-        # TODO: calculate TTC
         distances = scan_msg.ranges
         angle_min = scan_msg.angle_min
         incr = scan_msg.angle_increment
@@ -52,7 +49,6 @@ class Safety(object):
             
             ttc = dist / vitesse_proj
             
-            # TODO: publish brake message and publish controller bool
             if ttc < TTC_THRESHOLD:
                 brake_msg = AckermannDriveStamped()
                 brake_msg.drive.speed = 0.0
